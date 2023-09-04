@@ -3,6 +3,10 @@
   "displayName": "Komrad Filter Editor",
   "description": "Just filter editor for Komrad SIEM through API",
   "version": "0.0.1",
+  "repository": {
+		"type": "git",
+		"url": "https://github.com/duckl1ng-git/komrad-filter-editor-ts"
+	},
   "engines": {
     "vscode": "^1.81.0"
   },
