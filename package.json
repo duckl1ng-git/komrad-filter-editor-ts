@@ -1,0 +1,129 @@
+{
+  "name": "komrad-filter-editor",
+  "displayName": "Komrad Filter Editor",
+  "description": "Just filter editor for Komrad SIEM through API",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.81.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "komrad-filter-explorer",
+          "title": "Komrad Filter Explorer",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "komrad-filter-explorer": [
+        {
+          "id": "filters-list",
+          "name": "Filters List"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "filters-list.refresh",
+        "title": "Refresh",
+        "icon": {
+          "light": "media/refresh_light.svg",
+          "dark": "media/refresh_dark.svg"
+        }
+      },
+      {
+        "command": "filters-list.edit",
+        "title": "Edit",
+        "icon": {
+          "light": "media/edit_light.svg",
+          "dark": "media/edit_dark.svg"
+        }
+      },
+      {
+        "command": "filters-list.upload",
+        "title": "Upload",
+        "icon": {
+          "light": "media/upload_light.svg",
+          "dark": "media/upload_dark.svg"
+        }
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "filters-list.refresh",
+          "when": "view == filters-list",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "filters-list.edit",
+          "when": "view == filters-list",
+          "group": "inline"
+        },
+        {
+          "command": "filters-list.upload",
+          "when": "view == filters-list",
+          "group": "inline"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Komrad Filter Editor",
+      "properties": {
+        "komrad-filter-editor.targetUrl": {
+          "type": "string",
+          "default": "https://localhost",
+          "description": "Your Komrad instance address",
+          "pattern": "https:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.?[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)"
+        },
+        "komrad-filter-editor.login": {
+          "type": "string",
+          "default": "login",
+          "description": "Login for your account"
+        },
+        "komrad-filter-editor.password": {
+          "type": "string",
+          "default": "password",
+          "description": "Password for your account"
+        },
+        "komrad-filter-editor.token": {
+          "type": "string",
+          "description": "Set session token instead of login and password"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@types/node-fetch": "^2.6.4",
+    "@types/vscode": "^1.81.0",
+    "@typescript-eslint/eslint-plugin": "^6.4.1",
+    "@typescript-eslint/parser": "^6.4.1",
+    "@vscode/test-electron": "^2.3.4",
+    "eslint": "^8.47.0",
+    "glob": "^10.3.3",
+    "mocha": "^10.2.0",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.7"
+  }
+}
